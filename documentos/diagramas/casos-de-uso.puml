@@ -1,0 +1,35 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+
+actor "Cidadão" as cid
+actor "Vigilância" as vig
+actor "Especialista" as esp
+actor "Gestão Pública" as ges
+
+rectangle "Vetor Alerta" {
+  usecase "Registrar ocorrência com foto" as UC01
+  usecase "Associar localização" as UC02
+  usecase "Obter identificação preliminar\npor IA" as UC03
+  usecase "Acompanhar ocorrência" as UC04
+  usecase "Triar e reavaliar ocorrência" as UC05
+  usecase "Validar identificação" as UC06
+  usecase "Visualizar painel de gestão" as UC07
+
+  usecase "Analisar imagem com IA" as UC_IA
+  usecase "Persistir ocorrência" as UC_DB
+}
+
+cid --> UC01
+cid --> UC02
+cid --> UC03
+cid --> UC04
+
+vig --> UC05
+esp --> UC06
+ges --> UC07
+
+UC01 ..> UC_IA : <<include>>
+UC01 ..> UC_DB : <<include>>
+UC05 ..> UC06 : <<extend>>
+@enduml
