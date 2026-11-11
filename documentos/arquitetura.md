@@ -6,18 +6,20 @@ Situação: arquitetura proposta. O registro com foto está implementado; os dem
 
 O Vetor Alerta será composto por um aplicativo (mobile), uma API de aplicação, um serviço de IA para análise de imagens, um banco de dados em nuvem e uma camada de mapas/visualização.
 
-    flowchart LR
-        U[Cidadão] --> F[Aplicativo Mobile]
-        V[Vigilância / Especialista] --> F
-        G[Gestão pública] --> F
-        F -- imagem + localização --> A[API]
-        A --> IA[Serviço de IA<br/>identificação preliminar]
-        A --> DB[(Banco de dados em nuvem)]
-        A --> MAP[Mapas e visualização]
-        IA -- identificação preliminar --> A
-        A -- triagem e validação --> F
-        DB --> PAINEL[Painel de gestão e análise]
-        PAINEL --> F
+~~~mermaid
+flowchart LR
+    U[Cidadão] --> F[Aplicativo Mobile]
+    V[Vigilância / Especialista] --> F
+    G[Gestão pública] --> F
+    F -- imagem + localização --> A[API]
+    A --> IA[Serviço de IA<br/>identificação preliminar]
+    A --> DB[(Banco de dados em nuvem)]
+    A --> MAP[Mapas e visualização]
+    IA -- identificação preliminar --> A
+    A -- triagem e validação --> F
+    DB --> PAINEL[Painel de gestão e análise]
+    PAINEL --> F
+~~~
 
 ## 2. Componentes
 
@@ -53,31 +55,33 @@ Visualização de padrões e áreas de atenção para apoio à gestão pública.
 
 Estruturas principais (proposta):
 
-    classDiagram
-        class Ocorrencia {
-            +id
-            +imagem
-            +localizacao
-            +estado
-            +criada_em
-        }
-        class IdentificacaoIA {
-            +rotulo
-            +confianca
-            +preliminar
-        }
-        class Triagem {
-            +responsavel
-            +parecer
-            +estado
-        }
-        class Validacao {
-            +especialista
-            +resultado
-        }
-        Ocorrencia --> IdentificacaoIA
-        Ocorrencia --> Triagem
-        Ocorrencia --> Validacao
+~~~mermaid
+classDiagram
+    class Ocorrencia {
+        +id
+        +imagem
+        +localizacao
+        +estado
+        +criada_em
+    }
+    class IdentificacaoIA {
+        +rotulo
+        +confianca
+        +preliminar
+    }
+    class Triagem {
+        +responsavel
+        +parecer
+        +estado
+    }
+    class Validacao {
+        +especialista
+        +resultado
+    }
+    Ocorrencia --> IdentificacaoIA
+    Ocorrencia --> Triagem
+    Ocorrencia --> Validacao
+~~~
 
 As estruturas acima existem para persistência dos registros. Detalhamento completo em modelagem.md.
 
