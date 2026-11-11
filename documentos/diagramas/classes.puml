@@ -1,1 +1,71 @@
+@startuml
+skinparam classAttributeIconSize 0
 
+package "API" {
+  class OcorrenciaController {
+    +registrarOcorrencia()
+    +consultarEstado()
+    +triarOcorrencia()
+    +validarOcorrencia()
+  }
+  class Pipeline {
+    +processarAnalise()
+    +descartarDados()
+  }
+}
+
+package "Serviços" {
+  class ServicoIA {
+    +analisarImagem()
+  }
+  class ServicoGeo {
+    +associarLocalizacao()
+  }
+  class ServicoTriagem {
+    +gerenciarEstado()
+  }
+  class ServicoValidacao {
+    +registrarValidacao()
+  }
+  class ServicoPainel {
+    +agregarDados()
+  }
+}
+
+package "Modelo" {
+  class Ocorrencia {
+    +id
+    +imagem
+    +estado
+    +criada_em
+  }
+  class IdentificacaoIA {
+    +rotulo
+    +confianca
+    +preliminar
+  }
+  class Localizacao {
+    +coordenadas
+  }
+  class Triagem {
+    +responsavel
+    +parecer
+  }
+  class Validacao {
+    +especialista
+    +resultado
+  }
+}
+
+OcorrenciaController --> Pipeline
+Pipeline --> ServicoIA
+Pipeline --> ServicoGeo
+Pipeline --> ServicoTriagem
+Pipeline --> ServicoValidacao
+Pipeline --> ServicoPainel
+
+Ocorrencia "1" *-- "1" IdentificacaoIA
+Ocorrencia "1" *-- "1" Localizacao
+Ocorrencia "1" *-- "0..*" Triagem
+Ocorrencia "1" *-- "0..*" Validacao
+@enduml
