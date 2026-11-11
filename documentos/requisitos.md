@@ -1,45 +1,66 @@
-# Diagramas de classes e entidade-relacionamento
+# Requisitos do Vetor Alerta
 
-Situação: modelagem proposta, alinhada à arquitetura. O registro com foto está implementado; as demais classes estão em desenvolvimento ou planejadas.
+Situação: documento de planejamento. Parte das funcionalidades está implementada (registro com foto); as demais estão em desenvolvimento ou planejadas.
 
-## 1. Diagrama de classes
+## 1. Visão geral e escopo
 
-### API
-| Classe | Responsabilidade |
+O Vetor Alerta é um aplicativo de vigilância colaborativa que usa Inteligência Artificial, geolocalização e dados para identificar e monitorar vetores e riscos à saúde pública.
+
+**Dentro do escopo:**
+- Registro de ocorrências com foto (implementado).
+- Identificação preliminar por IA da imagem (em desenvolvimento).
+- Associação da ocorrência a um local para mapeamento (em desenvolvimento).
+- Triagem e validação por responsáveis e especialistas (planejada).
+- Painel de gestão com padrões e áreas de atenção (planejado).
+
+**Fora do escopo:**
+- Substituir a validação por especialistas.
+- Diagnóstico sanitário definitivo.
+- Cadastro de usuários com dados sensíveis (mínimo necessário).
+
+## 2. Público-alvo
+
+Cidadãos, agentes de vigilância, especialistas e gestão pública.
+
+## 3. Requisitos funcionais
+
+| ID | Requisito | Prioridade | Estado |
+|---|---|---|---|
+| RF01 | O sistema deve permitir registrar uma ocorrência com imagem (foto ou seleção de arquivo). | Alta | Implementada |
+| RF02 | O sistema deve permitir associar a ocorrência a uma localização (geolocalização/mapa). | Alta | Em desenvolvimento |
+| RF03 | O sistema deve executar análise por IA da imagem para identificação preliminar do vetor ou animal. | Alta | Em desenvolvimento |
+| RF04 | O sistema deve permitir triagem e reavaliação das ocorrências por responsáveis e especialistas. | Média | Planejada |
+| RF05 | O sistema deve disponibilizar painel de gestão com padrões e áreas de atenção. | Média | Planejada |
+| RF06 | O sistema deve acompanhar o histórico/estado da ocorrência (registrada, em análise, validada). | Média | Planejada |
+| RF07 | O sistema deve explicar ao usuário que a identificação por IA é preliminar e não substitui validação especializada. | Alta | Planejada |
+
+## 4. Requisitos não funcionais
+
+| ID | Requisito |
 |---|---|
-| OcorrenciaController | Recebe registros, valida imagem e localização e devolve estado e identificação preliminar. |
-| Pipeline | Orquestra análise por IA, persistência, triagem e validação. |
+| RNF01 | Privacidade (LGPD): coletar apenas dados necessários; imagens e localizações tratadas com finalidade de vigilância. |
+| RNF02 | Desempenho: retorno da identificação preliminar por IA em tempo compatível com uso em campo (a definir). |
+| RNF03 | Acessibilidade: interface seguindo WCAG 2.1 nível AA. |
+| RNF04 | Responsividade: funcionar em celulares (app) e computadores. |
+| RNF05 | Idioma: interface e mensagens em português. |
+| RNF06 | Transparência: deixar claro que a IA é preliminar e não substitui especialistas. |
+| RNF07 | Segurança: armazenamento em nuvem com controle de acesso por perfil. |
 
-### Serviços
-| Classe | Responsabilidade | Requisitos |
-|---|---|---|
-| ServicoIA | Analisa a imagem e retorna identificação preliminar com confiança. | RF03 |
-| ServicoGeo | Associa e valida localização; apoia mapas. | RF02 |
-| ServicoTriagem | Gerencia estados e pareceres da vigilância. | RF04, RF06 |
-| ServicoValidacao | Registra validação/correção por especialistas. | RF04 |
-| ServicoPainel | Agrega dados para o painel de gestão. | RF05 |
+## 5. Histórias de usuário
 
-### Modelo
-Estruturas persistidas: `Ocorrencia`, `IdentificacaoIA`, `Localizacao`, `Triagem`, `Validacao`, `Usuario` (perfil) e enumerações `EstadoOcorrencia`, `PerfilUsuario`.
+- **HU01 — Registrar uma ocorrência:** Como cidadão, quero enviar uma foto e a localização de um possível vetor para contribuir com a vigilância.
+- **HU02 — Acompanhar minha ocorrência:** Como cidadão, quero acompanhar o estado da ocorrência que registrei.
+- **HU03 — Fazer triagem:** Como agente de vigilância, quero analisar e reavaliar ocorrências para direcionar ações.
+- **HU04 — Validar identificações:** Como especialista, quero validar ou corrigir a identificação preliminar da IA.
+- **HU05 — Planejar ações:** Como gestor público, quero visualizar padrões e áreas de atenção para planejar ações preventivas.
 
-**Relações principais:**
-- `Ocorrencia` possui uma `IdentificacaoIA`, uma `Localizacao`, pode ter `Triagem` e `Validacao`.
-- `Usuario` tem `PerfilUsuario` e participa de `Triagem`/`Validacao`.
+## 6. Critérios de aceitação
 
-## 2. Diagrama entidade-relacionamento
-
-| Entidade | Descrição | Usada por |
-|---|---|---|
-| OCORRENCIA | Registro com imagem, localização e estado. | Registro, triagem, painel |
-| IDENTIFICACAO_IA | Rótulo preliminar e confiança. | ServicoIA |
-| LOCALIZACAO | Coordenadas/endereço associado. | ServicoGeo, mapas |
-| TRIAGEM | Parecer e estado atribuídos pela vigilância. | ServicoTriagem |
-| VALIDACAO | Resultado da validação por especialista. | ServicoValidacao |
-| USUARIO | Perfil de acesso (cidadão, vigilância, especialista, gestão). | Todos |
-
-**Relacionamentos:**
-- OCORRENCIA 1 : 1 IDENTIFICACAO_IA
-- OCORRENCIA 1 : 1 LOCALIZACAO
-- OCORRENCIA 1 : N TRIAGEM
-- OCORRENCIA 1 : N VALIDACAO
-- USUARIO 1 : N TRIAGEM / VALIDACAO
+| História | Critério |
+|---|---|
+| HU01 | Dado um registro com imagem válida, o sistema confirma o envio e exibe identificação preliminar. |
+| HU01 | Sem localização associada, o sistema permite registrar e sinaliza ausência de geolocalização. |
+| HU02 | O cidadão vê o estado atualizado da ocorrência. |
+| HU03 | O agente consegue alterar o estado da ocorrência e registrar parecer. |
+| HU04 | O especialista consegue validar ou corrigir a identificação da IA. |
+| HU05 | O painel exibe ocorrências agregadas por local e período. |
