@@ -296,6 +296,7 @@
       aspect-ratio: 3 / 4; /* Formato de tela de celular */
       background-color: #e6f4ee;
       border-bottom: 1px solid var(--borda);
+      overflow: hidden; /* Impede a imagem de vazar */
     }
 
     /* Recorte cirúrgico usando background-image */
@@ -304,16 +305,16 @@
       height: 100%;
       background-image: url('prototipo.jpeg');
       background-repeat: no-repeat;
-      /* A imagem original tem 3 colunas e 2 linhas */
-      background-size: 300% 200%; 
+      /* Ajuste do zoom para focar apenas no celular e ignorar textos vazios */
+      background-size: 330% 230%; 
     }
 
-    /* Posicionamento exato de cada tela */
-    .tela-1 { background-position: 0% 0%; }       /* Coluna 1, Linha 1 */
-    .tela-2 { background-position: 50% 0%; }      /* Coluna 2, Linha 1 */
-    .tela-3 { background-position: 100% 0%; }     /* Coluna 3, Linha 1 */
-    .tela-4 { background-position: 15% 100%; }    /* Coluna 1, Linha 2 (ajustado) */
-    .tela-5 { background-position: 85% 100%; }    /* Coluna 2, Linha 2 (ajustado) */
+    /* Posicionamento exato de cada tela com base na imagem original */
+    .tela-1 { background-position: 4% 4%; }       
+    .tela-2 { background-position: 48% 4%; }      
+    .tela-3 { background-position: 92% 4%; }     
+    .tela-4 { background-position: 0% 98%; }    
+    .tela-5 { background-position: 44% 98%; }    
 
     .legenda {
       padding: 1rem;
