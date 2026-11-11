@@ -60,7 +60,7 @@ A arquitetura do projeto é baseada nas seguintes tecnologias e módulos:
 
 ## 📚 Documentação
 
-Toda a documentação técnica do projeto está disponível na pasta [`docs`](./docs). Lá você encontrará:
+Toda a documentação técnica do projeto está disponível na pasta [`docs`](./documentos). Lá você encontrará:
 - [Requisitos do sistema](./documentos/requisitos.md)
 - [Casos de uso](./documentos/casos-de-uso.md)
 - [Arquitetura e dados](./documentos/arquitetura.md)
