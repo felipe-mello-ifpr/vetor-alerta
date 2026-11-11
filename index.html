@@ -285,6 +285,55 @@
       .hero h1 { font-size: 1.6rem; }
       h2 { font-size: 1.3rem; }
     }
+
+    .prototipo-card {
+      padding: 0; /* Remove o preenchimento padrão do card */
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .tela-app {
+      width: 100%;
+      aspect-ratio: 1 / 1; /* Cria um quadrado perfeito */
+      background-image: url('prototipo.png'); /* NOME DO ARQUIVO DA SUA IMAGEM */
+      background-size: 300% 200%; /* A imagem original tem 3 colunas e 2 linhas */
+      background-repeat: no-repeat;
+      border-bottom: 1px solid var(--borda);
+      background-color: #f7fbf9;
+    }
+
+    /* Posicionamento do background para recortar cada tela */
+    .tela-1 { background-position: 0% 0%; }       /* Coluna 1, Linha 1 */
+    .tela-2 { background-position: 50% 0%; }      /* Coluna 2, Linha 1 */
+    .tela-3 { background-position: 100% 0%; }     /* Coluna 3, Linha 1 */
+    .tela-4 { background-position: 0% 100%; }     /* Coluna 1, Linha 2 */
+    .tela-5 { background-position: 50% 100%; }    /* Coluna 2, Linha 2 */
+
+    .legenda {
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .legenda strong {
+      color: var(--verde-escuro);
+      font-size: 1rem;
+    }
+
+    .legenda span {
+      font-size: 0.85rem;
+      color: var(--cinza);
+      line-height: 1.4;
+    }
+
+    /* Ajuste para telas menores (celular) para não espremer os quadrados */
+    @media (max-width: 600px) {
+      .prototipo-grid {
+        grid-template-columns: 1fr 1fr; /* 2 colunas no celular */
+      }
+    }
   </style>
 </head>
 <body>
@@ -445,18 +494,53 @@
     <section id="demonstracao" aria-labelledby="titulo-demonstracao">
       <h2 id="titulo-demonstracao">Demonstração e evidências</h2>
       <p class="lead">
-        Espaço para capturas de tela, protótipos e vídeo curto demonstrando um fluxo de uso.
-        <em>(Substitua o bloco abaixo pelas imagens reais do projeto, com legendas e texto alternativo.)</em>
+        Conheça o fluxo de uso do aplicativo Vetor Alerta através do nosso protótipo de alta fidelidade.
       </p>
-      <div class="grid">
-        <div class="placeholder" role="img" aria-label="Espaço reservado para captura de tela do registro de ocorrência">
-          Captura de tela — Registro de ocorrência
+      
+      <div class="grid prototipo-grid">
+        <!-- Tela 01 -->
+        <div class="card prototipo-card">
+          <div class="tela-app tela-1" role="img" aria-label="Tela de Login e Cadastro"></div>
+          <div class="legenda">
+            <strong>01. Login / Cadastro</strong>
+            <span>Acesso seguro e consentimento LGPD.</span>
+          </div>
         </div>
-        <div class="placeholder" role="img" aria-label="Espaço reservado para captura de tela da análise por IA">
-          Captura de tela — Análise por IA
+
+        <!-- Tela 02 -->
+        <div class="card prototipo-card">
+          <div class="tela-app tela-2" role="img" aria-label="Tela Home e Dashboard"></div>
+          <div class="legenda">
+            <strong>02. Home / Dashboard</strong>
+            <span>Histórico de ocorrências e dicas.</span>
+          </div>
         </div>
-        <div class="placeholder" role="img" aria-label="Espaço reservado para captura de tela do mapa de ocorrências">
-          Captura de tela — Mapa de ocorrências
+
+        <!-- Tela 03 -->
+        <div class="card prototipo-card">
+          <div class="tela-app tela-3" role="img" aria-label="Tela de Escanear Vetor"></div>
+          <div class="legenda">
+            <strong>03. Escanear / Câmera</strong>
+            <span>Captura da imagem e análise por IA.</span>
+          </div>
+        </div>
+
+        <!-- Tela 04 -->
+        <div class="card prototipo-card">
+          <div class="tela-app tela-4" role="img" aria-label="Tela de Resultado e Reporte"></div>
+          <div class="legenda">
+            <strong>04. Resultado</strong>
+            <span>Identificação e envio para a vigilância.</span>
+          </div>
+        </div>
+
+        <!-- Tela 05 -->
+        <div class="card prototipo-card">
+          <div class="tela-app tela-5" role="img" aria-label="Tela de Mapa de Calor"></div>
+          <div class="legenda">
+            <strong>05. Mapa de Calor</strong>
+            <span>Alertas da região e áreas de risco.</span>
+          </div>
         </div>
       </div>
     </section>
