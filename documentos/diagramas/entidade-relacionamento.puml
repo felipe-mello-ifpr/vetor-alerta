@@ -1,1 +1,52 @@
+@startuml
+skinparam linetype ortho
 
+entity "OCORRENCIA" as ocorrencia {
+  * id : UUID
+  --
+  imagem : String
+  estado : String
+  criada_em : DateTime
+}
+
+entity "IDENTIFICACAO_IA" as ia {
+  * id : UUID
+  --
+  rotulo : String
+  confianca : Float
+  preliminar : Boolean
+}
+
+entity "LOCALIZACAO" as local {
+  * id : UUID
+  --
+  coordenadas : String
+  endereco : String
+}
+
+entity "TRIAGEM" as triagem {
+  * id : UUID
+  --
+  parecer : String
+  estado : String
+}
+
+entity "VALIDACAO" as validacao {
+  * id : UUID
+  --
+  resultado : String
+}
+
+entity "USUARIO" as usuario {
+  * id : UUID
+  --
+  perfil : String
+}
+
+ocorrencia ||--|| ia : possui
+ocorrencia ||--|| local : possui
+ocorrencia ||--o{ triagem : recebe
+ocorrencia ||--o{ validacao : recebe
+usuario ||--o{ triagem : realiza
+usuario ||--o{ validacao : realiza
+@enduml
