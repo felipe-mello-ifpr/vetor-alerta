@@ -286,35 +286,58 @@
       h2 { font-size: 1.3rem; }
     }
 
+    .prototipo-grid {
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+    }
+
     .prototipo-card {
-      padding: 0; /* Remove o preenchimento padrão do card */
+      background: var(--branco);
+      border: 1px solid var(--borda);
+      border-radius: var(--radius);
       overflow: hidden;
+      box-shadow: var(--sombra);
       display: flex;
       flex-direction: column;
+      transition: transform 0.2s ease;
     }
 
-    .tela-app {
+    .prototipo-card:hover {
+      transform: translateY(-4px);
+    }
+
+    /* O "Wapper" esconde as sobras da imagem e cria o quadrado */
+    .tela-wrapper {
       width: 100%;
-      aspect-ratio: 1 / 1; /* Cria um quadrado perfeito */
-      background-image: url('prototipo.jpeg'); /* NOME DO ARQUIVO DA SUA IMAGEM */
-      background-size: 300% 200%; /* A imagem original tem 3 colunas e 2 linhas */
-      background-repeat: no-repeat;
+      aspect-ratio: 3 / 4; /* Formato de tela de celular */
+      overflow: hidden;
+      background-color: #e6f4ee;
       border-bottom: 1px solid var(--borda);
-      background-color: #f7fbf9;
+      position: relative;
     }
 
-    /* Posicionamento do background para recortar cada tela */
-    .tela-1 { background-position: 0% 0%; }       /* Coluna 1, Linha 1 */
-    .tela-2 { background-position: 50% 0%; }      /* Coluna 2, Linha 1 */
-    .tela-3 { background-position: 100% 0%; }     /* Coluna 3, Linha 1 */
-    .tela-4 { background-position: 0% 100%; }     /* Coluna 1, Linha 2 */
-    .tela-5 { background-position: 50% 100%; }    /* Coluna 2, Linha 2 */
+    /* A imagem é ampliada e posicionada para mostrar só o celular */
+    .img-tela {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      /* O scale aumenta a imagem para os textos de fora sumirem */
+      transform: scale(2.5); 
+    }
+
+    /* Posicionamento fino de cada tela (escondendo as margens e textos) */
+    .tela-1 { object-position: 8% 12%; }
+    .tela-2 { object-position: 50% 12%; }
+    .tela-3 { object-position: 92% 12%; }
+    .tela-4 { object-position: 25% 75%; }
+    .tela-5 { object-position: 70% 75%; }
 
     .legenda {
       padding: 1rem;
       display: flex;
       flex-direction: column;
       gap: 0.25rem;
+      background: var(--branco);
     }
 
     .legenda strong {
@@ -326,13 +349,6 @@
       font-size: 0.85rem;
       color: var(--cinza);
       line-height: 1.4;
-    }
-
-    /* Ajuste para telas menores (celular) para não espremer os quadrados */
-    @media (max-width: 600px) {
-      .prototipo-grid {
-        grid-template-columns: 1fr 1fr; /* 2 colunas no celular */
-      }
     }
   </style>
 </head>
@@ -499,8 +515,10 @@
       
       <div class="grid prototipo-grid">
         <!-- Tela 01 -->
-        <div class="card prototipo-card">
-          <div class="tela-app tela-1" role="img" aria-label="Tela de Login e Cadastro"></div>
+        <div class="prototipo-card">
+          <div class="tela-wrapper">
+            <img src="prototipo.jpeg" alt="Tela de Login e Cadastro" class="img-tela tela-1" />
+          </div>
           <div class="legenda">
             <strong>01. Login / Cadastro</strong>
             <span>Acesso seguro e consentimento LGPD.</span>
@@ -508,8 +526,10 @@
         </div>
 
         <!-- Tela 02 -->
-        <div class="card prototipo-card">
-          <div class="tela-app tela-2" role="img" aria-label="Tela Home e Dashboard"></div>
+        <div class="prototipo-card">
+          <div class="tela-wrapper">
+            <img src="prototipo.jpeg" alt="Tela Home e Dashboard" class="img-tela tela-2" />
+          </div>
           <div class="legenda">
             <strong>02. Home / Dashboard</strong>
             <span>Histórico de ocorrências e dicas.</span>
@@ -517,8 +537,10 @@
         </div>
 
         <!-- Tela 03 -->
-        <div class="card prototipo-card">
-          <div class="tela-app tela-3" role="img" aria-label="Tela de Escanear Vetor"></div>
+        <div class="prototipo-card">
+          <div class="tela-wrapper">
+            <img src="prototipo.jpeg" alt="Tela de Escanear Vetor" class="img-tela tela-3" />
+          </div>
           <div class="legenda">
             <strong>03. Escanear / Câmera</strong>
             <span>Captura da imagem e análise por IA.</span>
@@ -526,8 +548,10 @@
         </div>
 
         <!-- Tela 04 -->
-        <div class="card prototipo-card">
-          <div class="tela-app tela-4" role="img" aria-label="Tela de Resultado e Reporte"></div>
+        <div class="prototipo-card">
+          <div class="tela-wrapper">
+            <img src="prototipo.jpeg" alt="Tela de Resultado e Reporte" class="img-tela tela-4" />
+          </div>
           <div class="legenda">
             <strong>04. Resultado</strong>
             <span>Identificação e envio para a vigilância.</span>
@@ -535,8 +559,10 @@
         </div>
 
         <!-- Tela 05 -->
-        <div class="card prototipo-card">
-          <div class="tela-app tela-5" role="img" aria-label="Tela de Mapa de Calor"></div>
+        <div class="prototipo-card">
+          <div class="tela-wrapper">
+            <img src="prototipo.jpeg" alt="Tela de Mapa de Calor" class="img-tela tela-5" />
+          </div>
           <div class="legenda">
             <strong>05. Mapa de Calor</strong>
             <span>Alertas da região e áreas de risco.</span>
