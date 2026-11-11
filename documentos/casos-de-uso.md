@@ -4,7 +4,7 @@ Situação: documento de planejamento. O registro com foto está implementado; o
 
 O diagrama abaixo descreve as interações entre os atores e o Vetor Alerta, com base nos requisitos de requisitos.md.
 
-Código-fonte do diagrama (PlantUML): diagramas/casos-de-uso.puml. Versão em imagem: PNG.
+Código-fonte do diagrama (PlantUML): diagramas/casos-de-uso.puml. Versão em imagem: [PN](documentos/diagramas/image.png)G.
 
 ## Atores
 
